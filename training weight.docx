@@ -1,0 +1,53 @@
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import requests
+data = pd.read_csv('data.csv')
+
+x = data.iloc[:202, 2].values
+
+yd = data.iloc[:202, :2].values
+
+data.head()
+
+total_wt1_x=[]
+total_wt2_x=[]
+total_wt1_x2=[]
+total_wt2_x2=[]
+def weight(y1,y2,x):
+  w1_x = y1/x
+  w2_x = y2/x
+  w1_x2 = y1/(x**2)
+  w2_x2 = y2/(x**2)
+  total_wt1_x.append(w1_x)
+  total_wt2_x.append(w2_x)
+  
+  total_wt1_x2.append(w1_x2)
+  total_wt2_x2.append(w2_x2)
+
+for elem in x:
+  for el in yd:
+    weight(el[0],el[1],elem)
+
+wt = [np.mean(total_wt1_x),np.mean(total_wt2_x),np.mean(total_wt1_x2),np.mean(total_wt2_x2)]
+wt
+
+np.mean(total_wt2_x)
+
+np.mean(total_wt1_x2)
+
+np.mean(total_wt2_x2)
+
+w1_fin = np.mean(total_wt1)
+w2_fin = np.mean(total_wt2)
+
+def predict(x):
+  return w1_fin*x,w2_fin*x
+
+w1,w2 = predict(45)
+w1/2
+
+
+
+
+
